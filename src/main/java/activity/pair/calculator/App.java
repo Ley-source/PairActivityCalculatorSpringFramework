@@ -44,7 +44,7 @@ public class App {
         context.close();
     }
 
-    // Whole numbers show without .0, decimals show normally
+    // itong function pag yung result ay decimal (Ex.: 2 / 52 = 0.03846153846) pero pag whole number, edi whole number
     private static String formatResult(double result) {
         if (result == Math.floor(result) && !Double.isInfinite(result)) {
             return String.valueOf((long) result);
