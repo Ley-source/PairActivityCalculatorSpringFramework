@@ -53,3 +53,9 @@ public class App {
         return String.valueOf(result);
     }
 }
+
+
+/* bali mga inapply natin ng spring framework dito is 
+new AnnotationConfigApplicationContext(AppConfig.class) - starts the loC Container which is the pure spring 
+context.getBean(CalculatorService.class) - Dependency injection, ito yung kukunin yung bean sa spring, kesa gumamit ulit ng new 
+context.close() - closes the spring */
