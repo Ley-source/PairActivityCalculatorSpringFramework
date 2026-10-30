@@ -19,7 +19,7 @@ public class App {
         System.out.println(" Prepared by: Harley G. Balotro & Ara Roxas");
         System.out.println("=========================================");
         System.out.println("Type expressions (example: 2 + 3 * 4)");
-        System.out.println("Supports: + - * / ^ ( ) sqrt()");
+        System.out.println("Supports: + - * / ( )");
         System.out.println("Type 'exit' to quit\n");
 
         while (true) { // keeps the calculator runningg
