@@ -1,0 +1,59 @@
+package activity.pair.calculator;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Controller
+public class CalculatorController {
+
+    private final CalculatorService calculatorService;
+
+    public CalculatorController(CalculatorService calculatorService) {
+        this.calculatorService = calculatorService;
+    }
+
+    @GetMapping("/")
+    public String home() {
+        return "calculator";
+    }
+
+    @PostMapping("/calculate")
+    public String calculate(@RequestParam String expression, Model model) {
+        try {
+            double result = calculatorService.evaluate(expression);
+            model.addAttribute("result", formatResult(result));
+            model.addAttribute("expression", expression);
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("expression", expression);
+        }
+        return "calculator";
+    }
+
+    @GetMapping("/calculate-ajax")
+    @ResponseBody
+    public Map<String, String> calculateAjax(@RequestParam String expression) {
+        Map<String, String> response = new HashMap<>();
+        try {
+            double result = calculatorService.evaluate(expression);
+            response.put("result", formatResult(result));
+        } catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
+        return response;
+    }
+
+    private String formatResult(double result) {
+        if (result == Math.floor(result) && !Double.isInfinite(result)) {
+            return String.valueOf((long) result);
+        }
+        return String.valueOf(result);
+    }
+}
